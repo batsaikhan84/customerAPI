@@ -11,7 +11,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -29,9 +31,15 @@ public class customerController {
     public Page<Customer> getCustomers(Pageable pageable) {
         return customerRepository.findAll(pageable);
     }
-    @PostMapping("/customers")
-    public Customer addCustomer(@RequestBody Customer customer) {
-        return customerRepository.save(customer);
+//    @PostMapping("/customers")
+//    public Customer addCustomer(@RequestBody Customer customer) {
+//        return customerRepository.save(customer);
+//    }
+    @GetMapping("/customers")
+    public String getCustomers(Model model) {
+        List<Customer> customerList = new ArrayList<>();
+        model.addAttribute("customers", customerList);
+        return "customerList";
     }
     @GetMapping("/customers/{id}")
     public ResponseEntity<Customer> getCustomer(@PathVariable(value = "id") long id) throws RecordNotFoundException {
