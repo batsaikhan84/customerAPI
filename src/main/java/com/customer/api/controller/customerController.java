@@ -46,7 +46,7 @@ public class customerController {
         deleteCustomer.put("Person is deleted", "by id: " + id);
         return deleteCustomer;
     }
-    @PutMapping("/customers/{id")
+    @PutMapping("/customers/{id}")
     public ResponseEntity<Customer> updateCustomer(@PathVariable(value = "id")long id, @RequestBody Customer customerDetails) throws RecordNotFoundException {
         Customer customer = customerRepository.findById(id).orElseThrow(() -> new RecordNotFoundException("ID " + id + " not found"));
         customer.setName(customerDetails.getName());
