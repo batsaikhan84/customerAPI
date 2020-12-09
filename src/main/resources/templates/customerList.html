@@ -8,9 +8,42 @@
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
     </head>
     <body>
-        <div class="container">
+        <div class="container my-2">
             <div class="card">
-
+                <div class="card-body">
+                    <div th:switch="${customers}" class=""container my-5></div>
+                    <p class="my-5">
+                        <a href="/>edit" class="btn btn-primary"></a>
+                        <i class="fas fa-user ml-2">Add Customer</i>
+                    </p>
+                    <div class="col-md-10">
+                        <h2 th:case="null">No customer data found</h2>
+                        <div th:case="*">
+                            <table class="table table-stripped table-responsive-md">
+                                <thead>
+                                <tr>
+                                    <th>id</th>
+                                    <th>Name</th>
+                                    <th>Email</th>
+                                    <th>Phone</th>
+                                    <th>Created</th>
+                                    <th>Updated</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                    <tr th:each="customer : ${customers}">
+                                        <td th:text="${customer.id}"></td>
+                                        <td th:text="${customer.name}"></td>
+                                        <td th:text="${customer.email}"></td>
+                                        <td th:text="${customer.phone}"></td>
+                                        <td th:text="${customer.created_at}"></td>
+                                        <td th:text="${customer.updated_at}"></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </body>
