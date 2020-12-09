@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
@@ -22,19 +23,19 @@ public class customerController {
     String appName;
     @Autowired
     public CustomerRepository customerRepository;
-    @GetMapping("/")
-    public String homepage(Model model) {
-        model.addAttribute("appName", appName);
-        return "home";
-    }
-    @GetMapping("/customers")
-    public Page<Customer> getCustomers(Pageable pageable) {
-        return customerRepository.findAll(pageable);
-    }
-//    @PostMapping("/customers")
-//    public Customer addCustomer(@RequestBody Customer customer) {
-//        return customerRepository.save(customer);
+//    @GetMapping("/")
+//    public String homepage(Model model) {
+//        model.addAttribute("appName", appName);
+//        return "home";
 //    }
+//    @GetMapping("/customers")
+//    public Page<Customer> getCustomers(Pageable pageable) {
+//        return customerRepository.findAll(pageable);
+//    }
+    @PostMapping("/customers")
+    public Customer addCustomer(@RequestBody Customer customer) {
+        return customerRepository.save(customer);
+    }
     @GetMapping("/customers")
     public String getCustomers(Model model) {
         List<Customer> customerList = new ArrayList<>();
